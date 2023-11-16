@@ -62,7 +62,7 @@ const Home = ({ shoppingCart, setShoppingCart, navigation }: any) => { // Receba
 
   const handleAddToCart = (product: any) => {
     openToast("Item Adicionado");
-    setShoppingCart([...shoppingCart, { ...product, quantity: 1 }]); // Defina a quantidade inicial como 1 ao adicionar
+    setShoppingCart([...shoppingCart, { ...product, quantity: 1 }]); 
   };
 
   return (
@@ -88,8 +88,8 @@ const Home = ({ shoppingCart, setShoppingCart, navigation }: any) => { // Receba
           <Button
   onPress={() => {
     openToast("Item Adicionado");
-    const updatedCart = [...shoppingCart, { ...product, quantity: 1 }]; // Adiciona o produto com quantidade 1 ao carrinho
-    setShoppingCart(updatedCart); // Atualiza o carrinho
+    const updatedCart = [...shoppingCart, { ...product, quantity: 1 }]; 
+    setShoppingCart(updatedCart); 
     navigation.navigate('ShoppingCart', { 
       shoppingCart: updatedCart,
       setShoppingCart: setShoppingCart,
