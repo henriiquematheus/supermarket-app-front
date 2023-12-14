@@ -7,6 +7,8 @@ import CreateAccount from "./src/pages/createAccount/CreateAccount";
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import ShoppingCart from "./src/pages/shoppingCart/ShoppingCart";
+import Chat from "./src/pages/chat/Chat";
+import { View } from 'react-native';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -15,43 +17,68 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen
+  options={({ navigation }) => ({
+    title: "Ofertas",
+    headerShown: true,
+    headerTitleAlign: "center",
+    headerLeft: () => (
+      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+        <Icon
+          onPress={() =>
+            navigation.navigate("ShoppingCart", { shoppingCart })
+          }
+          name="shoppingcart"
+          size={25}
+          color={"#000"}
+        />
+        <Icon
+          onPress={() => navigation.navigate("Chat")}
+          style={{ marginLeft: 10 }}
+          name="wechat"
+          size={25}
+          color={"#000"}
+        />
+      </View>
+    ),
+    headerRight: () => (
+      <Icon
+        onPress={() => navigation.navigate("Login")}
+        style={{ marginRight: 10 }}
+        name="logout"
+        size={25}
+        color={"#000"}
+      />
+    ),
+  })}
+  name="Home"
+>
+  {(props) => (
+    <Home
+      {...props}
+      shoppingCart={shoppingCart}
+      setShoppingCart={setShoppingCart}
+    />
+  )}
+</Stack.Screen>
         <Stack.Screen
-          options={({ navigation }) => ({
-            title: "Ofertas",
-            headerShown: true,
-            headerTitleAlign: "center",
-            headerLeft: () => (
-              <Icon
-                onPress={() =>
-                  navigation.navigate("ShoppingCart", { shoppingCart })
-                }
-                style={{ marginLeft: 10 }}
-                name="shoppingcart"
-                size={25}
-                color={"#000"}
-              />
-            ),
-            headerRight: () => (
-              <Icon
-                onPress={() => navigation.navigate("Login")}
-                style={{ marginRight: 10 }}
-                name="logout"
-                size={25}
-                color={"#000"}
-              />
-            ),
-          })}
-          name="Home"
-        >
-          {(props) => (
-            <Home
-              {...props}
-              shoppingCart={shoppingCart}
-              setShoppingCart={setShoppingCart}
-            />
-          )}
-        </Stack.Screen>
-
+  options={({ navigation }) => ({
+    title: "Chat",
+    headerShown: true,
+    headerTitleAlign: "center",
+    headerLeft: () => (
+      <Icon
+  onPress={() => navigation.navigate("Chat")} // Navigate to the chat screen
+  style={{ marginLeft: 10 }}
+  name="WechatOutlined" // Use the "wechat" icon from AntDesign
+  size={25}
+  color={"#000"}
+/>
+    ),
+  })}
+  name="Chat"
+  component={Chat} // Substitua "Chat" pelo nome correto do componente de chat
+/>
         <Stack.Screen
           options={({ navigation }) => ({
             headerShown: false,

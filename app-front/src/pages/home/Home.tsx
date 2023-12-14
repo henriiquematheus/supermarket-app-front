@@ -1,6 +1,6 @@
-import { StatusBar } from "expo-status-bar";
+import { StatusBar, Platform } from "react-native";
 import React from "react";
-import { ScrollView, Text, View, Button, ToastAndroid } from "react-native";
+import { ScrollView, Text, View, Button } from "react-native"; 
 import { Card } from "react-native-elements";
 
 const products = [
@@ -55,14 +55,22 @@ const products = [
   },
 ];
 
-const Home = ({ shoppingCart, setShoppingCart, navigation }: any) => { // Receba navigation como um argumento
+const Home = ({ shoppingCart, setShoppingCart, navigation }: any) => {
   const openToast = (message: string) => {
-    ToastAndroid.show(message, ToastAndroid.SHORT);
+    if (Platform.OS === 'android' && ToastAndroid) {
+      ToastAndroid.show(message, ToastAndroid.SHORT);
+    } else {
+      console.log(message); // Fallback para o ambiente que não suporta ToastAndroid
+    }
   };
 
   const handleAddToCart = (product: any) => {
     openToast("Item Adicionado");
-    setShoppingCart([...shoppingCart, { ...product, quantity: 1 }]); // Defina a quantidade inicial como 1 ao adicionar
+    setShoppingCart([...shoppingCart, { ...product, quantity: 1 }]); 
+    navigation.navigate('ShoppingCart', { 
+      shoppingCart: updatedCart,
+      setShoppingCart: setShoppingCart,
+    });
   };
 
   return (
@@ -88,8 +96,8 @@ const Home = ({ shoppingCart, setShoppingCart, navigation }: any) => { // Receba
           <Button
   onPress={() => {
     openToast("Item Adicionado");
-    const updatedCart = [...shoppingCart, { ...product, quantity: 1 }]; // Adiciona o produto com quantidade 1 ao carrinho
-    setShoppingCart(updatedCart); // Atualiza o carrinho
+    const updatedCart = [...shoppingCart, { ...product, quantity: 1 }]; 
+    setShoppingCart(updatedCart); 
     navigation.navigate('ShoppingCart', { 
       shoppingCart: updatedCart,
       setShoppingCart: setShoppingCart,
