@@ -9,6 +9,8 @@ import Icon from "react-native-vector-icons/AntDesign";
 import ShoppingCart from "./src/pages/shoppingCart/ShoppingCart";
 import Chat from "./src/pages/chat/Chat";
 import { View } from 'react-native';
+import { navigationStyles } from './NavigationStyles';
+
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -16,44 +18,50 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen
-  options={({ navigation }) => ({
-    title: "Ofertas",
-    headerShown: true,
-    headerTitleAlign: "center",
-    headerLeft: () => (
-      <View style={{ flexDirection: 'row', marginLeft: 10 }}>
-        <Icon
-          onPress={() =>
-            navigation.navigate("ShoppingCart", { shoppingCart })
-          }
-          name="shoppingcart"
-          size={25}
-          color={"#000"}
-        />
-        <Icon
-          onPress={() => navigation.navigate("Chat")}
-          style={{ marginLeft: 10 }}
-          name="wechat"
-          size={25}
-          color={"#000"}
-        />
-      </View>
-    ),
-    headerRight: () => (
-      <Icon
-        onPress={() => navigation.navigate("Login")}
-        style={{ marginRight: 10 }}
-        name="logout"
-        size={25}
-        color={"#000"}
-      />
-    ),
-  })}
-  name="Home"
->
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerStyle: navigationStyles.headerStyle,
+          headerTitleStyle: navigationStyles.headerTitleStyle,
+          headerTintColor: navigationStyles.headerTintColor,
+          headerTitleAlign: navigationStyles.headerTitleAlign,
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          options={({ navigation }) => ({
+            title: 'Supermercado',
+            headerShown: true,
+            headerLeft: () => (
+              <View style={{ flexDirection: 'row', marginLeft: 10 }}>
+                <Icon
+                  onPress={() => navigation.navigate('ShoppingCart', { shoppingCart })}
+                  name="shoppingcart"
+                  size={25}
+                  color={'#fff'}
+                />
+                <Icon
+                  onPress={() => navigation.navigate('Chat')}
+                  style={{ marginLeft: 10 }}
+                  name="wechat"
+                  size={25}
+                  color={'#fff'}
+                />
+              </View>
+            ),
+            headerRight: () => (
+              <Icon
+                onPress={() => navigation.navigate('Login')}
+                style={{ marginRight: 10 }}
+                name="logout"
+                size={25}
+                color={'#fff'}
+              />
+            ),
+          })}
+        >
   {(props) => (
+    
     <Home
       {...props}
       shoppingCart={shoppingCart}

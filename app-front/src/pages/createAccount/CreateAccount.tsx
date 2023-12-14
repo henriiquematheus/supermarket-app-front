@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Text, View, TextInput, Button, TouchableOpacity, Alert } from 'react-native'; // Importe o Alert do React Native
 import styles from './CreateAccountStyle'; // Importe os estilos
 
-const API_BASE_URL = 'http://localhost:8000/api'; // Substitua pelo seu endereço real
+const API_BASE_URL = 'http://192.168.0.24:8000/api'; // Substitua pelo seu endereço real
 
 const CreateAccount = ({ navigation }: any) => {
   const [username, setUsername] = useState('');

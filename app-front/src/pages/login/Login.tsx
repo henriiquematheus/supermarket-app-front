@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
-import Logo from 'react-native-vector-icons/AntDesign';
+import { Text, View, TextInput, TouchableOpacity } from 'react-native';
 import Styles from './LoginStyle';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const API_BASE_URL = 'http://localhost:8000/api'; // Substitua pelo seu endereço real
+const API_BASE_URL = 'http://192.168.0.24:8000/api'; // Substitua pelo seu endereço real
 
 const Login = ({ navigation }: any) => {
   const [username, setUsername] = useState('');
@@ -16,21 +16,25 @@ const Login = ({ navigation }: any) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name:username, password }),
+        body: JSON.stringify({ name: username, password }),
       });
-
+  
       if (!response.ok) {
-        // Se a resposta não for bem-sucedida, exiba uma mensagem de erro
         console.error('Login failed');
         return;
       }
 
+      const data = await response.json();
+      const userToken = data.token;
+
+      
+
       // Se o login for bem-sucedido, redirecione para a página Home
       navigation.navigate('Home');
-    } catch (error) {
-      console.error('Error during login:', error);
-    }
-  };
+  } catch (error) {
+    console.error('Error during login:', error);
+  }
+};
 
   const goToPage = (path: string) => {
     navigation.navigate(path);
@@ -38,38 +42,35 @@ const Login = ({ navigation }: any) => {
 
   return (
     <View style={Styles.container}>
-      <View style={Styles.logo}>
-        <Logo name="isv" size={100} color={'#2089DC'} />
+      <View style={Styles.formContainer}>
         <Text style={Styles.text}>Supermercado</Text>
-      </View>
+        <Text style={Styles.label}>Login</Text>
+        <TextInput
+          style={Styles.input}
+          placeholder="User"
+          onChangeText={(text) => setUsername(text)}
+        />
+        <TextInput
+          secureTextEntry={true}
+          style={Styles.input}
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+        />
+        
+        <View style={Styles.createAccountForgot}>
+          <TouchableOpacity onPress={() => goToPage('CreateAccount')} style={Styles.createAccountButton}>
+            <Text style={Styles.link}>Create Account</Text>
+          </TouchableOpacity>
 
-      <Text style={Styles.label}>Login</Text>
-      <TextInput
-        style={Styles.input}
-        placeholder="User"
-        onChangeText={(text) => setUsername(text)}
-      />
-      <TextInput
-        secureTextEntry={true}
-        style={Styles.input}
-        placeholder="Password"
-        onChangeText={(text) => setPassword(text)}
-      />
-      
-      <View style={Styles.createAccountForgot}>
-        {/* Botão para criar conta */}
-        <TouchableOpacity onPress={() => goToPage('CreateAccount')}>
-          <Text style={Styles.link}>Create Account</Text>
+          <TouchableOpacity onPress={() => goToPage('ForgotPassword')} style={Styles.forgotPasswordButton}>
+            <Text style={Styles.link}>Forgot Password</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity onPress={handleLogin} style={Styles.button}>
+          <Text style={Styles.buttonText}>Login</Text>
         </TouchableOpacity>
-
-        {/* Botão para recuperar senha */}
-        <TouchableOpacity onPress={() => goToPage('ForgotPassword')}>
-          <Text style={Styles.link}>Forgot Password</Text>
-        </TouchableOpacity>
       </View>
-
-      {/* Botão para fazer login */}
-      <Button onPress={handleLogin} title="Login" />
     </View>
   );
 };

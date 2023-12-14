@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   label: {
     alignSelf: 'flex-start',
     marginBottom: 5,
+    color: '#333',
   },
   input: {
     width: '100%',
@@ -24,6 +25,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 15,
     paddingHorizontal: 10,
+    borderRadius: 5,
   },
   button: {
     width: '100%',
