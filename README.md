@@ -27,3 +27,10 @@ To run this project, you'll need to add the following environment variables to t
 `API_BASE_URL= 'Your ip':'Your port'/api`
 
 A example: `API_BASE_URL = 'http://192.168.0.1:8000/api';`
+
+
+## Related
+
+For integration with the backend, learn more at:
+
+[Supermarket backend](https://github.com/henriiquematheus/super-back)
