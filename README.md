@@ -1,6 +1,6 @@
 # Supermarket Frontend
 
-This project was developed for a university class. The task was to create an app featuring a shopping cart, user account creation, and home page. The project is integrated with the backend, allowing users to create accounts, log in, and enabling supermarket staff to add, edit, or delete products.
+This project was developed for a university class. The task was to create an app featuring a shopping cart, user account creation, and home page. The project is integrated with the backend, allowing users to create accounts, log in, buy, add to cart,  and enabling supermarket staff to add, edit, or delete products.
 
 
 ## Key Learnings
