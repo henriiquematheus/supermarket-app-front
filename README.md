@@ -7,13 +7,9 @@ This project was developed for a university class. The task was to create an app
 The primary challenge revolved around integrating the shopping cart feature due to numerous bugs. Connecting it with the backend and JWT posed considerable difficulty. However, this project provided a deeper understanding of these aspects.
 
 
-## Screenshots
-![App Screenshot](https://i.postimg.cc/QtLHzXdt/Screenshot-2023-12-21-18-13-53-029-host-exp-exponent.jpg) 
-
-![App Screenshot](https://i.postimg.cc/8Cf7wFD9/IMG-20231221-WA0005.jpg)
-
-
-
+| Login                           | Cart                            |
+| ----------------------------------- | ----------------------------------- |
+| ![App Screenshot](https://i.postimg.cc/QtLHzXdt/Screenshot-2023-12-21-18-13-53-029-host-exp-exponent.jpg)  | ![App Screenshot](https://i.postimg.cc/8Cf7wFD9/IMG-20231221-WA0005.jpg) |
 
 
 ## Installation
